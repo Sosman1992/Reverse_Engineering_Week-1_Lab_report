@@ -40,19 +40,23 @@ Using DependencyWalker on the `.EXE`, we can see which functions are imported fr
 # Lab 1-2
 
 ## Executive Summary
-These files appear to be malware, and they appear to engage in some kind of filesystem manipulation. We have so far not found what they do, but there are indications that it hides a `kerne1.dll` file in the `system32` directory.
+The sample appear to be malware, and it seems it will be running a service named `MalService` on the infected machine that enables in connecting to a website `www.malwareanalysis.com` to download other malwares
 
 ## Indicators of Compromise
 
 *Compilation Date (presumed):** JANUARY 2011
 
 **MD5 Hash (EXE):** 8363436878404da0ae3e46991e355b83 
-**IP:**  
+
+**IP:** 
+
 **URLs:** http://www.malwareanalysisbook.com/
+
 **Registry Keys:*
+
 **Mutex:**
-**File Paths:**
-**File names:**
+
+**File names:** MalService
 
 
 ## Mitigations
