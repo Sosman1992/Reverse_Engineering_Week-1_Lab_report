@@ -13,11 +13,25 @@ These files appear to be malware, and they appear to engage in some kind of file
 
 **Compilation Date (presumed):** DEC 2010
 
-**MD5 Hash (EXE):** bb7425b82141a1c0f7d60e5106676bb1 
+**MD5 Hash (EXE):** bb7425b82141a1c0f7d60e5106676bb1
 
-**MD5 Hash (DLL):** 290934c61de9176ad682ffdd65f0a669  
+**SHA-1 Hash (EXE):**  9dce39ac1bd36d877fdb0025ee88fdaff0627cdb 
+
+**SHA-256 Hash (EXE):**  58898bd42c5bd3bf9b1389f0eee5b39cd59180e8370eb9ea838a0b327bd6fe47 
+
+**MD5 Hash (DLL):** 290934c61de9176ad682ffdd65f0a669 
+
+**SHA-1 Hash (DLL):**  a4b35de71ca20fe776dc72d12fb2886736f43c22 
+
+**SHA-256 Hash (DLL):** f50e42c8dfaab649bde0398867e930b86c2a599e8db83b8260393082268f2dba
 
 **File to look for:** `C:\windows\system32\kerne132.dll`
+
+**File type:** Win32 DLL 
+
+**PEiD packer:** Microsoft Visual C++ v6.0 DLL 
+
+
 
 ## Mitigations
 
