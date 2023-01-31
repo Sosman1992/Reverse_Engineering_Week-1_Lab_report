@@ -66,8 +66,6 @@ The sample appear to be malware, and it seems it will be running a service named
 
 **URLs:** http://www.malwareanalysisbook.com/
 
-**Mutex:**
-
 **Service Name:** MalService
 
 
