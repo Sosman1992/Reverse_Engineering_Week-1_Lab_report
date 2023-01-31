@@ -62,11 +62,13 @@ The sample appear to be malware, and it seems it will be running a service named
 
 **MD5 Hash (EXE):** 8363436878404da0ae3e46991e355b83 
 
+**SHA-256 (EXE):** 8bcbe24929951d8aae6018b87b5ca799efe47aeb623e6e5d3665814c6d59aeae
+
 **URLs:** http://www.malwareanalysisbook.com/
 
 **Mutex:**
 
-**Service ame:** MalService
+**Service Name:** MalService
 
 
 ## Mitigations
