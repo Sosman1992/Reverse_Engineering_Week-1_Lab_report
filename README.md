@@ -7,7 +7,7 @@ The Weeks Lab focus was on the use of file hashes as a technique for identifying
 
 ## Executive Summary
 
-These files were both compiled on the same date, looking at the `time date stamp` and it can be concluded that the `.exe` and `.dll` files are part of the same package. However, both the `.exe` and `.dll` are neither packed or obfuscated. Also there is an indication of a string kerne132.dll that seems similar to Windows kernel.dll file in the `system32` directory of windows computer to enable it appear as a windows normal file to enable it computers on the network and engage itself in some kind of filesystem manipulation. 
+These files were both compiled on the same date, looking at the `time date stamp` from PEview and it can be concluded that the `.exe` and `.dll` files are part of the same package. However, both the `.exe` and `.dll` are neither packed or obfuscated after opening both seperately using the PeID utility tool. Also there is an indication of a string kerne132.dll that seems similar to Windows kernel.dll file in the `system32` directory of windows computer to enable it appear as a windows normal file to enable it computers on the network and engage itself in some kind of filesystem manipulation. 
 
 ## Indicators of Compromise 
 
