@@ -1,13 +1,15 @@
 # Week 1 - Simple Static Analysis
 
-The Weeks Lab was focus on the use of file hashes as technique for identifying malware samples. Additionally, submitting sample of malware files or hashes Google's VirusTotal tool to view the outcomes of a scan with a variety of antivirus programs was performed. Furthermore how to use `strings` to search for ASCII and Unicode strings inside of a binary was also learnt and also discovered how to use PEiD to determine whether a binary of a malware samples executable or linked library file is compressed to conceal its contents. Lastly exploration of Windows system tools that are used by portable executable including libraries that get dynamically linked and which functions are imported was also learnt.
+The Weeks Lab focus was on the use of file hashes as a technique for identifying malware samples. Additionally, submitted sample of malware files or hashes by uploading these file via Google's VirusTotal website to scan the files with a variety of antivirus programs embedded in the website. Furthermore used BinText GUI  to search for ASCII and Unicode `strings` inside of a binary and also discovered how to use PEiD to determine whether the binary of a malware samples executable or linked library file is compressed to conceal its contents. Lastly exploration of Windows system tools that are used by portable executable including libraries that get dynamically linked and which functions are imported was also learnt.
 
 ---
 # Lab 1-1 
 
 ## Executive Summary
 
-These files were both compiled on the same date within a of each other, looking at the `time date stamp` it can be concluded that they are part of the same package, and they appear to engage in some kind of filesystem manipulation. However, both the `.exe` and `.dll` are neither packed or obfuscated and in addition to the static analysis conducted so far on thes samples using the available tools I am unable to conclude on the detriment or infections they are or would cause to systems they will infect, but there are indications that they are disguising to be a Windows  kernel.dll file in the `system32` directory of the computer they will infect but analysing statically it is a modified `kerne1.dll` naming not the usual Windows file .
+These files were both compiled on the same date, looking at the `time date stamp` and it can be concluded that the `.exe` and `.dll` files are part of the same package. However, both the `.exe` and `.dll` are neither packed or obfuscated and in addition to the static analysis conducted so far on these samples using the available tools I am unable to conclude on the detriment or infections they are or would cause to systems they will infect, but there is an indication of a string
+kerne132.dll that seems similar to Windows kernel.dll file in the `system32` directory of windows computer to enable it appear as a windows normal file
+they will infect to engage in some kind of filesystem manipulation. 
 
 ## Indicators of Compromise 
 
@@ -35,7 +37,7 @@ These files were both compiled on the same date within a of each other, looking 
 
 ## Mitigations
 
-- Deletions of files matching any of these hashes obtained from the scanning result 
+- Deletions of files matching any of these hashes obtained from the scanning result from the VirusTotal website
 - Scan Windows machines for `system32\kerne132.dll`
 
 ## Evidence
@@ -48,42 +50,36 @@ Opening the `.EXE` in BinText, the message string "`WARNING_THIS_WILL_DESTROY_YO
 
 Opening these files with PEview, we see that they both claim to have been compiled in late 2010. This matches what VirusTotal reported, but VirusTotal only saw samples appear in mid-2012.
 
-Using DependencyWalker on the `.EXE`, revealed the functions that were  imported from various other DLLs. 
-
+Using DependencyWalker on the `.EXE`, revealed the functions that were  imported from various other DLLs such as WS2_32.DLL which has has networking functions. 
 ---
 # Lab 1-2
 
 ## Executive Summary
-The sample appear to be malware, and it seems it will be running a service named `MalService` on the infected machine that enables in connecting to a website `www.malwareanalysis.com` to download other malwares
+The sample appear to be malware, and it seems it will be running a service named `MalService` on the infected machine that would enable it in connecting to a website `www.malwareanalysis.com` to download other malwares to infect an affected computer system and people on its network.
 
 ## Indicators of Compromise
 
-*Compilation Date (presumed):** JANUARY 2011
+**Compilation Date :** JANUARY 2011
 
 **MD5 Hash (EXE):** 8363436878404da0ae3e46991e355b83 
 
-**IP:** 
-
 **URLs:** http://www.malwareanalysisbook.com/
-
-**Registry Keys:*
 
 **Mutex:**
 
-**File names:** MalService
+**Service ame:** MalService
 
 
 ## Mitigations
-- Checking on machines to see if they are running a service called `MalService` then it implies the machine is infected
+- Scanning through a computer system to see if is running a service called `MalService` then it implies the machine is infected
 
 ## Evidence
 
-Opening the Lab file with PEiD, it can be seen that the file is packed with UPX a packing utililty. Using an unpacker it was able to unpack the file and get it to be recognized as Microsoft visual file. that was written and compiled using Microsoft Visual C++ 6.0
+Opening the Lab file with PEiD, it can be seen that the file is packed with UPX a packing utililty. Using an unpacker it was able to unpack the file and get it to be recognized as Microsoft visual file that was written and compiled using Microsoft Visual C++ 6.0
 
-Using DependencyWalker on the  unpacked`.EXE`, to find the imports of the unpacked file, `InternetOpenUrlA` and `InternetOpenA`.
+Using DependencyWalker on the  unpacked`.EXE`, to find the imports of the unpacked file, `InternetOpenUrlA` and `InternetOpenA` were revealed and they serve as a proof of the capability of the file connecting to the internet and in addition `CreateService` which is an import of the dynamic link library advapi32.dll serves as a proof that this suspected malware is capable of creating services on machines it infects to spread its infections.
 
-
-Using strings in the unpacked`.EXE`, suggests that infected machines will connect to `http://www.malwareanalysis.com` and in addition a running service named `MalService`
+Opening the unpacked`.EXE` using BinText GUI, suggests that infected machines will connect to `http://www.malwareanalysis.com` and in addition a running service named `MalService` for creating services that connects to the web and downloading of malwares  to infect the computer system and other machines on the network.
 
 ---
 
