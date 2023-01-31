@@ -7,9 +7,7 @@ The Weeks Lab focus was on the use of file hashes as a technique for identifying
 
 ## Executive Summary
 
-These files were both compiled on the same date, looking at the `time date stamp` and it can be concluded that the `.exe` and `.dll` files are part of the same package. However, both the `.exe` and `.dll` are neither packed or obfuscated and in addition to the static analysis conducted so far on these samples using the available tools I am unable to conclude on the detriment or infections they are or would cause to systems they will infect, but there is an indication of a string
-kerne132.dll that seems similar to Windows kernel.dll file in the `system32` directory of windows computer to enable it appear as a windows normal file
-they will infect to engage in some kind of filesystem manipulation. 
+These files were both compiled on the same date, looking at the `time date stamp` and it can be concluded that the `.exe` and `.dll` files are part of the same package. However, both the `.exe` and `.dll` are neither packed or obfuscated. Also there is an indication of a string kerne132.dll that seems similar to Windows kernel.dll file in the `system32` directory of windows computer to enable it appear as a windows normal file to enable it computers on the network and engage itself in some kind of filesystem manipulation. 
 
 ## Indicators of Compromise 
 
@@ -48,9 +46,10 @@ Opening these files with PEiD indicates that these files were written and compil
 
 Opening the `.EXE` in BinText, the message string "`WARNING_THIS_WILL_DESTROY_YOUR_MACHINE`", and some other suspicious string "`C:\windows\system32\kerne132.dll`", which replaces the `l` in kernel with a `1`. Nonetheless, windows does not have a file named `kerne132.dll` hence the presence of such serves to be a proof that of malware availability.
 
-Opening these files with PEview, we see that they both claim to have been compiled in late 2010. This matches what VirusTotal reported, but VirusTotal only saw samples appear in mid-2012.
+Opening these files with PEview, it can be seen that they both claim to have been compiled in late 2010. This matches what VirusTotal reported, but VirusTotal only saw samples appear in mid-2012.
 
-Using DependencyWalker on the `.EXE`, revealed the functions that were  imported from various other DLLs such as WS2_32.DLL which has has networking functions. 
+Using Dependency Walker on the `.DLL`, revealed the functions that were imported from various other link libraries of the code such as WS2_32.DLL which has networking capabalities tasks such as `bind` , `accept` , `connect` and closing `socket`. 
+
 ---
 # Lab 1-2
 
