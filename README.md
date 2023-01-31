@@ -7,7 +7,7 @@ The Weeks Lab was focus on the use of file hashes as technique for identifying m
 
 ## Executive Summary
 
-These files appear to be malware, and they appear to engage in some kind of filesystem manipulation. We have so far not found what they do, but there are indications that it hides a `kerne1.dll` file in the `system32` directory.
+These files were both compiled on the same date within a of each other, looking at the `time date stamp` it can be concluded that they are part of the same package, and they appear to engage in some kind of filesystem manipulation. However, both the `.exe` and `.dll` are neither packed or obfuscated and in addition to the static analysis conducted so far on thes samples using the available tools I am unable to conclude on the detriment or infections they are or would cause to systems they will infect, but there are indications that they are disguising to be a Windows  kernel.dll file in the `system32` directory of the computer they will infect but analysing statically it is a modified `kerne1.dll` naming not the usual Windows file .
 
 ## Indicators of Compromise 
 
@@ -35,20 +35,20 @@ These files appear to be malware, and they appear to engage in some kind of file
 
 ## Mitigations
 
-- Delete files that match this file's hash! 
+- Deletions of files matching any of these hashes obtained from the scanning result 
 - Scan Windows machines for `system32\kerne132.dll`
 
 ## Evidence
 
-This malware consisted of two components, a portable executable (EXE) and a dynamically linked library (DLL). Submitting either to VirusTotal sets off dozens of vendors' virus classifiers.
+These malware are made up of two components, a portable executable (EXE) and a dynamically linked library (DLL). Uploading either to VirusTotal sets off dozens of vendors' virus classifiers.
 
-Using `strings` on the `.EXE`, we find the message string "`WARNING_THIS_WILL_DESTROY_YOUR_MACHINE`", and some references to several file manipulation functions. We also see the suspicious string "`C:\windows\system32\kerne132.dll`", which replaces the `l` in kernel with a `1`. Such a file is not present in Windows by default, so it's presence could be an indicator of compromise.
+Opening these files with PEiD indicates that these files were written and compiled using Microsoft Visual C++ 6.0 , we see that they both claim to have been compiled in late 2010. 
 
-Using `strings` on the `.DLL` did not yield anything useful.
+Opening the `.EXE` in BinText, the message string "`WARNING_THIS_WILL_DESTROY_YOUR_MACHINE`", and some other suspicious string "`C:\windows\system32\kerne132.dll`", which replaces the `l` in kernel with a `1`. Nonetheless, windows does not have a file named `kerne132.dll` hence the presence of such serves to be a proof that of malware availability.
 
 Opening these files with PEview, we see that they both claim to have been compiled in late 2010. This matches what VirusTotal reported, but VirusTotal only saw samples appear in mid-2012.
 
-Using DependencyWalker on the `.EXE`, we can see which functions are imported from various other DLLs. Two of these which are particularly notable are `CreateProcess` and `Sleep`. The `Practical Malware Analysis` textbook teaches us that these functions can be combined to create a backdoor for running this malware. *(You would really only find this if you read the solutions at the back of the book, which is fair game.)*
+Using DependencyWalker on the `.EXE`, revealed the functions that were  imported from various other DLLs. 
 
 ---
 # Lab 1-2
@@ -78,7 +78,7 @@ The sample appear to be malware, and it seems it will be running a service named
 
 ## Evidence
 
-Opening the Lab file with PEiD, it can be seen that the file is packed with UPX a packing utililty. Using an unpacker it was able to unpack the file and get it to be recognized as Microsoft visual file.
+Opening the Lab file with PEiD, it can be seen that the file is packed with UPX a packing utililty. Using an unpacker it was able to unpack the file and get it to be recognized as Microsoft visual file. that was written and compiled using Microsoft Visual C++ 6.0
 
 Using DependencyWalker on the  unpacked`.EXE`, to find the imports of the unpacked file, `InternetOpenUrlA` and `InternetOpenA`.
 
@@ -86,24 +86,10 @@ Using DependencyWalker on the  unpacked`.EXE`, to find the imports of the unpack
 Using strings in the unpacked`.EXE`, suggests that infected machines will connect to `http://www.malwareanalysis.com` and in addition a running service named `MalService`
 
 ---
-# Lab 1-3
-
-## Executive Summary
-## Indicators of Compromise
-## Mitigations
-## Evidence
-
----
-# Lab 1-4
-
-## Executive Summary
-## Indicators of Compromise
-## Mitigations
-## Evidence
 
 ## Tools used and their functions
 - PeID : For confirming whether a file is packed or obfuscated
-- Strings: A sysinternals program that shows the strings in a program
+- BinText: A sysinternals GUI program that shows the strings in a program
 - PEView: Shows useful summary information about the portable executable(s), including compile time and imports
 - Dependency Walker: For showing imports
-_ Resource Hacker: Allows for viewing of objects in the resource section of the portable executable, and also enabling to extract data from the portable executable.
+
