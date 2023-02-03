@@ -29,10 +29,6 @@ These files were both compiled on the same date, looking at the `time date stamp
 
 **File type:** Win32 DLL 
 
-**PEiD packer:** Microsoft Visual C++ v6.0 DLL 
-
-
-
 ## Mitigations
 
 - Deletions of files matching any of these hashes obtained from the scanning result from the VirusTotal website
